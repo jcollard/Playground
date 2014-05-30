@@ -1,10 +1,10 @@
 {
-    "version": "0.0.1",
+    "version": "0.0.2",
     "summary": "Playground attempts to abstract away Signals",
     "description": "Provide an interface for creating interactive programs without explicitly defining signals. All of the signals are wired up under the hood.",
     "license": "BSD3",
     "exposed-modules": ["Playground", "Playground.Input"],
     "elm-version": "0.12.3",
     "dependencies": {},
-    "repository": "https://github.com/USER/PROJECT.git"
+    "repository": "https://github.com/jcollard/Playground.git"
 }
