@@ -4,7 +4,7 @@ module Playground.Input where
   This module explains each type of Input that can be used in a Playground's
   update function.
 
-  @doc Input, Direction, Key
+  @docs Input, Direction, Key
 
  -}
 

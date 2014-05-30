@@ -5,6 +5,11 @@ The Playground Library is a layer that abstracts away the need to write explicit
 Signals. To get started, one provides a `Playground` record and then passes that
 record to `play`. 
 
+## Quick Demo
+
+The following is a quick Demo of a program that increments a number
+repeatedly. When the space bar is pressed, the number is reset to 0.
+
 ```
 import Playground(..)
 import Playground.Input(..)
@@ -20,11 +25,11 @@ render (w, h) state = asText state
 main = play { render = render, update = update, initialState = 0 }
 ```
 
-# Playground Record
+## Playground Record
 
 @docs Playground
 
-# Playing a Playground
+## Playing a Playground
 
 @docs play, playWithRate
 
