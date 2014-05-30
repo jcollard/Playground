@@ -1,5 +1,5 @@
 {
-    "version": "0.0.3.1",
+    "version": "0.0.3.2",
     "summary": "Playground attempts to abstract away Signals",
     "description": "Provide an interface for creating interactive programs without explicitly defining signals. All of the signals are wired up under the hood.",
     "license": "BSD3",
