@@ -5,9 +5,25 @@ import Dict
 import Char
 import Keyboard
 import Mouse
+import Window
 
-updater : (Input -> state -> state) -> [Input] -> state -> state
-updater update is state = foldl update state is
+toRealWorld : (Int, Int) -> (Int, Int) -> RealWorld
+toRealWorld (width, height) (x, y) = 
+    let top = (toFloat height)/2
+        bottom = -top
+        right = (toFloat width)/2
+        left = -right
+        mouseX = (toFloat x) + right
+        mouseY = (toFloat y) + bottom
+    in { topLeft = (top, left),
+         bottomRight = (bottom, right),
+         mousePosition = (mouseX, mouseY) }
+
+realworld : Signal RealWorld
+realworld = toRealWorld <~ Window.dimensions ~ Mouse.position
+
+updater : (RealWorld -> Input -> state -> state) -> (RealWorld, [Input]) -> state -> state
+updater update (rw, is) state = foldl (update rw) state is
 
 inputs : Time -> Signal [Input]
 inputs rate = merges [keysDown rate, singleton <~ position, singleton <~ click]

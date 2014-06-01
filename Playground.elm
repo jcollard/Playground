@@ -44,6 +44,7 @@ main = play { render = render, update = update, initialState = 0 }
   - [Demo](http://people.cs.umass.edu/~jcollard/examples/Playground/build/Mario.html)
   - [Source](https://github.com/jcollard/Playground/blob/master/Examples/Mario.elm)
 
+
 -}
 
 import Internal(..)
@@ -63,9 +64,9 @@ must specify three fields: initialState, render, and update.
   and returns the updated State. All possible Inputs are defined in
   Playground.Input
 -}
-type Playground state = { render : ((Int, Int) -> state -> Element),
+type Playground state = { render : state -> [Form],
                           initialState : state,
-                          update : Input -> state -> state }
+                          update : RealWorld -> Input -> state -> state }
                                
 
 {-|
@@ -80,7 +81,5 @@ Plays a Playground at the specified number of frames per second.
 playWithRate : Time -> Playground state -> Signal Element
 playWithRate rate playground =
     let update = updater playground.update
-        input = inputs rate
-    in playground.render <~ Window.dimensions ~ foldp update playground.initialState input
-
-
+        input = (,) <~ realworld ~ inputs rate
+    in uncurry collage <~ Window.dimensions ~ (playground.render <~ foldp update playground.initialState input)

@@ -8,6 +8,10 @@ module Playground.Input where
 
  -}
 
+type RealWorld = { topLeft : (Float, Float),
+                   bottomRight : (Float, Float),
+                   mousePosition : (Float, Float) }
+
 
 {-|
   Inputs are passed to a Playground's update function. If multiple inputs are
