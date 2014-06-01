@@ -6,8 +6,8 @@ initialState : State
 initialState = {x = 0, y = 0, c = blue}
 
 -- Define how the state of your program should be rendered
-render : State -> [Form]
-render state = 
+render : RealWorld -> State -> [Form]
+render rw state = 
     let shape = circle 50 |> filled state.c |> move (state.x, state.y) 
     in [shape]
 

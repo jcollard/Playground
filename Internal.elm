@@ -17,9 +17,11 @@ toRealWorld (width, height) (x, y) =
         left = -right
         mouseX = (toFloat x) + right
         mouseY = (toFloat y) + bottom
-    in { topLeft = (top, left),
-         bottomRight = (bottom, right),
-         mousePosition = (mouseX, mouseY) }
+    in { top = top,
+         right = right,
+         bottom = bottom,
+         left = left,
+         mouse = {x = mouseX, y = mouseY}}
 
 realworld : Signal RealWorld
 realworld = toRealWorld <~ Window.dimensions ~ Mouse.position

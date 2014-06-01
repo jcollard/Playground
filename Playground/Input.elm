@@ -12,18 +12,17 @@ module Playground.Input where
   The RealWorld record contains information about the environment of the running
   program.
 
-  * The `topLeft` record is a pair that defines the top left most coordinate
-    that will be rendered during a `play`.
+  * The `top`, `right`, `bottom`, and `left` fields represent the bounding box
+    that will be rendered.
 
-  * The `bottomRight` record is a pair that defines the bottom right most
-    coordinate that will be rendered during a `play`.
-
-  * The `mousePosition` field is a pair that defines the current position of the
-    mouse cursor on the screen.
+  * The `mouse` field is a record containing the most recent x and y positions
+    of the mouse within the rendered bounding box.
  -}
-type RealWorld = { topLeft : (Float, Float),
-                   bottomRight : (Float, Float),
-                   mousePosition : (Float, Float) }
+type RealWorld = { top : Float,
+                   right : Float,
+                   bottom : Float,
+                   left : Float,
+                   mouse : { x : Float, y : Float }}
 
 
 {-|
