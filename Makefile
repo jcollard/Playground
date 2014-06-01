@@ -27,5 +27,6 @@ build/Mario.html:Examples/Mario.elm build/Playground.js
 
 clean: build	
 	find . -name "*~" -type f -delete
+	find . -name "#*" -type f -delete
 	rm build -rf
 	rm cache -rf
