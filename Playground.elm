@@ -57,17 +57,20 @@ must specify three fields: initialState, render, and update.
 
 * The `initialState` field describes the state of the Playground after it has
   been loaded.
+
 * The `render` field is a function which describes how your state should be
-  transformed into an element that can be displays. It takes in a pair
-  describing the width and height of the screen and a state to render.
-* The `update` field is a function that takes in an Input, a State to update,
-  and returns the updated State. All possible Inputs are defined in
-  Playground.Input
+  transformed into a set of Forms that can be displayed.
+
+* The `update` field is a function that takes in the RealWorld, an Input event,
+  a State to update, and returns the updated State. All possible Inputs are 
+  defined in Playground.Input. The RealWorld is defined in Playground.Input.
 -}
 type Playground state = { render : state -> [Form],
                           initialState : state,
                           update : RealWorld -> Input -> state -> state }
                                
+
+
 
 {-|
 Plays a Playground record at 60 frames per second.

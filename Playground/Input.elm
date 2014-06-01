@@ -4,10 +4,23 @@ module Playground.Input where
   This module explains each type of Input that can be used in a Playground's
   update function.
 
-  @docs Input, Key, Direction
+  @docs RealWorld, Input, Key, Direction
 
  -}
 
+{-|
+  The RealWorld record contains information about the environment of the running
+  program.
+
+  * The `topLeft` record is a pair that defines the top left most coordinate
+    that will be rendered during a `play`.
+
+  * The `bottomRight` record is a pair that defines the bottom right most
+    coordinate that will be rendered during a `play`.
+
+  * The `mousePosition` field is a pair that defines the current position of the
+    mouse cursor on the screen.
+ -}
 type RealWorld = { topLeft : (Float, Float),
                    bottomRight : (Float, Float),
                    mousePosition : (Float, Float) }
