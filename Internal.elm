@@ -6,6 +6,8 @@ import Char
 import Keyboard
 import Mouse
 import Window
+import Time
+import Set
 
 toRealWorld : (Int, Int) -> (Int, Int) -> RealWorld
 toRealWorld (width, height) (x, y) = 
@@ -26,23 +28,33 @@ updater : (RealWorld -> Input -> state -> state) -> (RealWorld, [Input]) -> stat
 updater update (rw, is) state = foldl (update rw) state is
 
 inputs : Time -> Signal [Input]
-inputs rate = merges [keysDown rate, singleton <~ position, singleton <~ click]
+inputs rate = merges [click, lastPressed, withRate rate]
 
 singleton : a -> [a]
 singleton x = [x]
 
 -- Define Mouse Inputs
-position : Signal Input
-position = uncurry MousePos <~ Mouse.position
+click : Signal [Input]
+click = singleton <~ sampleOn Mouse.clicks (constant Click)
 
-click : Signal Input
-click = uncurry Click <~ sampleOn Mouse.clicks Mouse.position
+toInputs : Time -> Input -> [Input] -> [Input]
+toInputs t click keys = (Passive t)::click::keys
+
+withRate : Time -> Signal [Input]
+withRate rate = 
+    let rate' = fps rate in
+    toInputs <~ rate' ~ (sampleOn Mouse.clicks (constant MouseDown)) ~ keysDown
 
 -- Define Keyboard Inputs
-keysDown : Time -> Signal [Input]
-keysDown rate = 
-    let rate' = fps rate in
-    (\t ks -> (Passive t)::ks) <~ rate' ~ sampleOn rate' (map Key . toKeys <~ Keyboard.keysDown)
+
+lastPressed : Signal [Input]
+lastPressed = 
+    let match = (\c d -> Set.member c (Set.fromList d))        
+        matchSig = match <~ Keyboard.lastPressed ~ merges [Keyboard.keysDown, sampleOn (Time.delay 1 Keyboard.keysDown) (constant [])]
+    in (\c -> map Tap . toKeys <| [c]) <~ (keepWhen matchSig 0 Keyboard.lastPressed)
+
+keysDown : Signal [Input]
+keysDown = map Key . toKeys <~ Keyboard.keysDown
 
 keys : Dict Char.KeyCode Key
 keys = foldr Dict.union Dict.empty [alphaKeys, specialKeys, arrowKeys, numbers]
