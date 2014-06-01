@@ -1,4 +1,5 @@
 module Playground.Input where
+import Keyboard.Keys as Keys
 
 {-|
   This module explains each type of Input that can be used in a Playground's
@@ -22,7 +23,7 @@ type RealWorld = { top : Float,
                    right : Float,
                    bottom : Float,
                    left : Float,
-                   mouse : { x : Float, y : Float }}
+                   mouse : { x : Float, y : Float } }
 
 
 {-|
@@ -40,22 +41,8 @@ type RealWorld = { top : Float,
 
 
  -}
-data Input = Tap Key
-           | Key Key
+data Input = Tap Keys.Key
+           | Key Keys.Key
            | Click
            | MouseDown
            | Passive Time
-
-{-|
-  A Key on the Keyboard.
- -}
-data Key = Ctrl | Shift | Space | Enter
-         | A | B | C | D | E | F | G | H | I | J | K | L | M 
-         | N | O | P | Q | R | S | T | U | V | W | X | Y | Z
-         | Number Int
-         | Arrow Direction 
-
-{-|
-  Used to determine which Arrow key is pressed.
- -}
-data Direction = Up | Down | Left | Right

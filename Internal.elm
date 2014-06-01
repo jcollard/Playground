@@ -4,6 +4,7 @@ import Dict(Dict)
 import Dict
 import Char
 import Keyboard
+import Keyboard.Keys as K
 import Mouse
 import Window
 import Time
@@ -57,38 +58,38 @@ lastPressed =
 keysDown : Signal [Input]
 keysDown = map Key . toKeys <~ Keyboard.keysDown
 
-keys : Dict Char.KeyCode Key
+keys : Dict Char.KeyCode K.Key
 keys = foldr Dict.union Dict.empty [alphaKeys, specialKeys, arrowKeys, numbers]
 
-numbers : Dict Char.KeyCode Key
+numbers : Dict Char.KeyCode K.Key
 numbers = Dict.fromList <| zip numbers' numbers''
 
 numbers' : [Char.KeyCode]
 numbers' = map Char.toCode ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
-numbers'' : [Key]
-numbers'' = map Number [0..9]
+numbers'' : [K.Key]
+numbers'' = [K.zero, K.one, K.two, K.three, K.four, K.five, K.six, K.seven, K.eight, K.nine]
 
-arrowKeys : Dict Char.KeyCode Key
-arrowKeys = Dict.fromList [(37, Arrow Left), (38, Arrow Up), (39, Arrow Right), (40, Arrow Down)]
+arrowKeys : Dict Char.KeyCode K.Key
+arrowKeys = Dict.fromList [(37, K.arrowLeft), (38, K.arrowUp), (39, K.arrowRight), (40, K.arrowDown)]
 
-alphaKeys : Dict Char.KeyCode Key
+alphaKeys : Dict Char.KeyCode K.Key
 alphaKeys = Dict.fromList <| zip alphas' alphas''
 
 alphas' : [Char.KeyCode]
 alphas' = map Char.toCode ['a','b','c','d','e','f','g','h','i','j','k','l','m',
                            'n','o','p','q','r','s','t','u','v','w','x','y','z']
 
-alphas'' : [Key]
-alphas'' = [A, B, C, D, E, F, G, H, I, J, K, L, M,
-            N, O, P, Q, R, S, T, U, V, W, X, Y, Z]
+alphas'' : [K.Key]
+alphas'' = [K.a, K.b, K.c, K.d, K.e, K.f, K.g, K.h, K.i, K.j, K.k, K.l, K.m,
+            K.n, K.o, K.p, K.q, K.r, K.s, K.t, K.u, K.v, K.w, K.x, K.y, K.z]
 
-specialKeys : Dict Char.KeyCode Key
-specialKeys = Dict.fromList [(17, Ctrl), (16, Shift), (32, Space), (13, Enter)]
+specialKeys : Dict Char.KeyCode K.Key
+specialKeys = Dict.fromList [(17, K.ctrl), (16, K.shift), (32, K.space), (13, K.enter)]
 
-toKeys : [Char.KeyCode] -> [Key]
+toKeys : [Char.KeyCode] -> [K.Key]
 toKeys = justs . map toKey
 
-toKey : Char.KeyCode -> Maybe Key
+toKey : Char.KeyCode -> Maybe K.Key
 toKey code = Dict.get code keys
 

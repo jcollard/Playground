@@ -1,5 +1,6 @@
 import Playground(..)
 import Playground.Input(..)
+import Keyboard.Keys as Keys
 
 -- Define what you want the state of your program to be
 type State = { mario : Mario, background : Background}
@@ -39,9 +40,13 @@ update : RealWorld -> Input -> State -> State
 update realworld input {mario, background} = 
        let mario' =
            case input of
-             Key (Arrow Left) -> {mario | vx <- mario.vx - 2, dir <- "left"}
-             Key (Arrow Right) -> {mario | vx <- mario.vx + 2, dir <- "right"}
-             Tap (Arrow Up) -> jump mario
+             Key k ->
+                 if | Keys.equal k Keys.arrowLeft -> {mario | vx <- mario.vx - 2, dir <- "left"}
+                    | Keys.equal k Keys.arrowRight -> {mario | vx <- mario.vx + 2, dir <- "right"}
+                    | otherwise -> mario
+             Tap k ->
+                 if | Keys.equal k Keys.arrowUp -> jump mario
+                    | otherwise -> mario
              Passive t -> gravity (t/20) (physics (t/20) mario)
              otherwise -> mario
        in {mario = mario', 

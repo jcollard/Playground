@@ -1,5 +1,7 @@
 import Playground(..)
 import Playground.Input(..)
+import Keyboard.Keys as Keys
+
 -- Define what you want the state of your program to be
 type State = {x : Float, y : Float, c : Color}
 initialState : State
@@ -15,13 +17,17 @@ render state =
 update : RealWorld -> Input -> State -> State
 update rw input state = 
     case input of
-      Key (Number 1) -> {state | c <- blue}
-      Key (Number 2) -> {state | c <- red}
-      Key (Number 3) -> {state | c <- green}
-      Key (Arrow Left) -> {state | x <- state.x - 5}
-      Key (Arrow Right)  -> {state | x <- state.x + 5}
-      Key (Arrow Down)  -> {state | y <- state.y - 5}
-      Key (Arrow Up)    -> {state | y <- state.y + 5}
+      Tap k ->
+          if | Keys.equal k Keys.one -> {state | c <- blue}
+             | Keys.equal k Keys.two -> {state | c <- red}
+             | Keys.equal k Keys.three -> {state | c <- green}
+             | otherwise -> state
+      Key k ->
+          if | Keys.equal k Keys.arrowLeft -> {state | x <- state.x - 5}
+             | Keys.equal k Keys.arrowRight -> {state | x <- state.x + 5}
+             | Keys.equal k Keys.arrowDown ->  {state | y <- state.y - 5}
+             | Keys.equal k Keys.arrowUp -> {state | y <- state.y + 5}
+             | otherwise -> state
       otherwise -> state
 
 playground : Playground State
