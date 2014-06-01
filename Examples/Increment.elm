@@ -7,6 +7,6 @@ update realworld input state =
     Key Space -> 0
     otherwise -> state + 1
 
-render _ state = [asText state |> toForm]
+render state = [asText state |> toForm]
 
 main = play { render = render, update = update, initialState = 0 }
