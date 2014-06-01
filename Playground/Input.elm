@@ -19,22 +19,19 @@ type RealWorld = { topLeft : (Float, Float),
   the changes. Your update function will always be passed a Passive input and
   it is guaranteed that the Passive input will occur before all other inputs.
 
-  * MousePos x y - This input is passed in whenever the mouse is moved on the 
-    screen. The x and y positions are relative to the top left corner of the
-    screen where the top left is x = 0, y = 0.
-
-  * Click x y - Similar to MousePos except it is fired when the left mouse
-    button is clicked.
-
+  * Tap k - Fires once when `k` is pressed
+  * Key k - Fires every time the update function is called while `k` is pressed
+  * Click - Fires once when the mouse is clicked
+  * MouseDown - Fires every time the update function is called while the mouse is down
   * Passive t - This input is always passed to the update function and expresses
     how many milliseconds have passed since the last update was accumulated.
 
-  * Key k - This input is passed in once for each key that is currently down.
 
  -}
-data Input = Key Key
-           | MousePos Int Int
-           | Click Int Int
+data Input = Tap Key
+           | Key Key
+           | Click
+           | MouseDown
            | Passive Time
 
 {-|

@@ -40,7 +40,7 @@ update realworld input mario =
     case input of
       Key (Arrow Left) -> {mario | vx <- mario.vx - 2, dir <- "left"}
       Key (Arrow Right) -> {mario | vx <- mario.vx + 2, dir <- "right"}
-      Key (Arrow Up) -> jump mario
+      Tap (Arrow Up) -> jump mario
       Passive t -> gravity (t/20) (physics (t/20) {mario | w <- w, h <- h})
       otherwise -> mario 
 
