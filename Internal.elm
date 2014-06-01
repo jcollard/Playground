@@ -46,7 +46,6 @@ withRate rate =
     toInputs <~ rate' ~ (sampleOn Mouse.clicks (constant MouseDown)) ~ keysDown
 
 -- Define Keyboard Inputs
-
 lastPressed : Signal [Input]
 lastPressed = 
     let match = (\c d -> Set.member c (Set.fromList d))        
