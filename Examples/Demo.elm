@@ -6,14 +6,14 @@ initialState : State
 initialState = {x = 0, y = 0, c = blue}
 
 -- Define how the state of your program should be rendered
-render : (Int, Int) -> State -> Element
-render (w, h) state = 
+render : State -> [Form]
+render state = 
     let shape = circle 50 |> filled state.c |> move (state.x, state.y) 
-    in collage w h [shape]
+    in [shape]
 
 -- Define how your program is updated
-update : Input -> State -> State
-update input state = 
+update : RealWorld -> Input -> State -> State
+update rw input state = 
     case input of
       Key (Number 1) -> {state | c <- blue}
       Key (Number 2) -> {state | c <- red}
