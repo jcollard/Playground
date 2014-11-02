@@ -10,7 +10,6 @@ Examples
 ## Increment
 A number appears centered on the screen and increments showing how many milliseconds have passed. If the user presses the space bar, the counter resets.
 
-#### Source | [View It!](http://jcollard.github.io/elm/Playground/Increment.html)
 ```haskell
 -- Increases an Int ~60 times per second. When the space bar is pressed, the Int
 -- resets
@@ -24,6 +23,10 @@ render state = [asText state |> toForm]
 
 main = play { render = render, update = update, initialState = 0 }
 ```
+
+[See It Running](http://jcollard.github.io/elm/Playground/Increment.html)
+
+
 
 * Ball: Shows how to create a simple interactive "game" where you can move a ball with the arrow keys and change the color using '1', '2', and '3'.
   - [Demo](http://jcollard.github.io/elm/Playground/Demo.html)
