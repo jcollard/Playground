@@ -12,7 +12,9 @@ Examples
 * [Mario](#mario): Basic example showing the classic Elm Mario demo.
 
 ## Increment
-A number appears centered on the screen and increments showing how many milliseconds have passed. If the user presses the space bar, the counter resets.
+A number appears centered on the screen and increments every 60 milliseconds. If the user presses the space bar, the counter resets.
+
+[See It Running](http://jcollard.github.io/elm/Playground/Increment.html)
 
 ```haskell
 -- Increases an Int ~60 times per second. When the space bar is pressed, the Int
@@ -28,12 +30,13 @@ render state = [asText state |> toForm]
 main = play { render = render, update = update, initialState = 0 }
 ```
 
-[See It Running](http://jcollard.github.io/elm/Playground/Increment.html)
-
 
 ## Ball
 A circle is drawn to the screen. Use the arrow keys to move it around the screen. Press `1`, `2`, or `3`, to change the circles color.
 
+[See It Running!](http://jcollard.github.io/elm/Playground/Demo.html)
+
+###Source
 ```haskell
 -- Define what you want the state of your program to be
 type State = {x : Float, y : Float, c : Color}
@@ -69,10 +72,13 @@ playground = {render = render, update = update, initialState = initialState}
 main : Signal Element
 main = play playground
 ```
-[See It Running!](http://jcollard.github.io/elm/Playground/Demo.html)
 
 ## Mario
 Move Mario using the arrow keys!
+
+[See It Running!](http://jcollard.github.io/elm/Playground/Mario.html)
+
+### Source
 
 ```haskell
 -- Define what you want the state of your program to be
@@ -129,5 +135,3 @@ update realworld input {mario, background} =
 main = play {render = render, update = update, initialState = initialState}
 ```
  
-[See It Running!](http://jcollard.github.io/elm/Playground/Mario.html)
-
