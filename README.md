@@ -7,11 +7,11 @@ Signals.
 Examples
 ========
 * Increment
-  - [Demo](http://people.cs.umass.edu/~jcollard/examples/Playground/build/Increment.html)
+  - [Demo](http://jcollard.github.com/jcollard.github.io/elm/Playground/Increment.html)
   - [Source](https://github.com/jcollard/Playground/blob/master/Examples/Increment.elm)
 * Ball
-  - [Demo](http://people.cs.umass.edu/~jcollard/examples/Playground/build/Demo.html)
+  - [Demo](http://jcollard.github.com/jcollard.github.io/elm/Playground/Demo.html)
   - [Source](https://github.com/jcollard/Playground/blob/master/Examples/Demo.elm)
 * Mario
-  - [Demo](http://people.cs.umass.edu/~jcollard/examples/Playground/build/Mario.html)
+  - [Demo](http://jcollard.github.com/jcollard.github.io/elm/Playground/Mario.html)
   - [Source](https://github.com/jcollard/Playground/blob/master/Examples/Mario.elm)
