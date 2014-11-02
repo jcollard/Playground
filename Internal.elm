@@ -1,4 +1,5 @@
 module Internal where
+import Maybe
 import Playground.Input(..)
 import Dict(Dict)
 import Dict
@@ -53,10 +54,10 @@ lastPressed : Signal [Input]
 lastPressed = 
     let match = (\c d -> Set.member c (Set.fromList d))        
         matchSig = match <~ Keyboard.lastPressed ~ merges [Keyboard.keysDown, sampleOn (Time.delay 1 Keyboard.keysDown) (constant [])]
-    in (\c -> map Tap . toKeys <| [c]) <~ (keepWhen matchSig 0 Keyboard.lastPressed)
+    in (\c -> map Tap << toKeys <| [c]) <~ (keepWhen matchSig 0 Keyboard.lastPressed)
 
 keysDown : Signal [Input]
-keysDown = map Key . toKeys <~ Keyboard.keysDown
+keysDown = map Key << toKeys <~ Keyboard.keysDown
 
 keys : Dict Char.KeyCode K.Key
 keys = foldr Dict.union Dict.empty [alphaKeys, specialKeys, arrowKeys, numbers]
@@ -88,8 +89,17 @@ specialKeys : Dict Char.KeyCode K.Key
 specialKeys = Dict.fromList [(17, K.ctrl), (16, K.shift), (32, K.space), (13, K.enter)]
 
 toKeys : [Char.KeyCode] -> [K.Key]
-toKeys = justs . map toKey
+toKeys = justs << map toKey
 
 toKey : Char.KeyCode -> Maybe K.Key
 toKey code = Dict.get code keys
+
+justs : [Maybe a] -> [a]
+justs chars = let helper = (\ xs acc -> 
+                                case xs of
+                                  [] -> acc
+                                  (y::ys) -> case y of
+                                               Just x -> helper ys (x::acc)
+                                               Nothing -> helper ys acc)
+              in helper chars []
 
