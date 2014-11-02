@@ -1,4 +1,4 @@
-CC = /usr/lib/elm/0.12.3/elm
+CC = elm
 build = build/
 runtime = elm/elm-runtime.js
 examples=Examples/
