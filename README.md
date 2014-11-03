@@ -4,6 +4,8 @@ Playground
 Playground attempts to add a layer of abstraction between the programmer and
 Signals. 
 
+To install, run `elm-get install jcollard/Playground` in the root directory of your elm project.
+
 Examples
 ========
 
